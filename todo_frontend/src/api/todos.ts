@@ -1,12 +1,8 @@
+import { Todo } from './types/Todo';
+
 const API_URL = 'http://localhost:3000/';
 
-interface Todo {
-  id: number;
-  description: string;
-  done: boolean;
-}
-
-export const getTodos = async (): Promise<Todo[] | undefined>=> {
+export const getTodos = async () => {
   try {
     const response = await fetch(`${API_URL}todos`);
     const todos = await response.json();
@@ -16,7 +12,7 @@ export const getTodos = async (): Promise<Todo[] | undefined>=> {
   }
 }
 
-export const addTodo = async (todo: Todo): Promise<Todo | undefined> => {
+export const addTodo = async (todo: Todo) => {
   try {
     const response = await fetch(`${API_URL}todos`, {
       method: 'POST',
@@ -51,7 +47,7 @@ export const updateTodo = async (id: string, todo: Todo) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(todo)
+      body: JSON.stringify({ description: todo.description, done: todo.done })
     });
     const updatedTodo = await response.json();
     return updatedTodo;

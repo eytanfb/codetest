@@ -1,4 +1,4 @@
-import { getTodos, addTodo, deleteTodo, updateTodo } from '../todos';
+import { getTodos, addTodo, deleteTodo, updateTodo } from '../Todos';
 
 const API_URL = 'http://localhost:3000';
 
@@ -48,7 +48,7 @@ describe('deleteTodo', () => {
       json: jest.fn().mockResolvedValueOnce(mockResponse),
     } as any);
 
-    await deleteTodo(1);
+    await deleteTodo(id);
 
     expect(global.fetch).toHaveBeenCalledWith(`${API_URL}/todos/${id}`, {
       method: 'DELETE',
