@@ -1,6 +1,12 @@
 const API_URL = 'http://localhost:3000/';
 
-export const getTodos = async () => {
+interface Todo {
+  id: number;
+  description: string;
+  done: boolean;
+}
+
+export const getTodos = async (): Promise<Todo[]> => {
   try {
     const response = await fetch(`${API_URL}todos`);
     const todos = await response.json();
@@ -11,7 +17,7 @@ export const getTodos = async () => {
   }
 }
 
-export const addTodo = async (todo) => {
+export const addTodo = async (todo: Todo): Promise<Todo> => {
   try {
     const response = await fetch(`${API_URL}todos`, {
       method: 'POST',
@@ -27,7 +33,7 @@ export const addTodo = async (todo) => {
   }
 }
 
-export const deleteTodo = async (id) => {
+export const deleteTodo = async (id: string) => {
   try {
     const response = await fetch(`${API_URL}todos/${id}`, {
       method: 'DELETE'
@@ -39,7 +45,7 @@ export const deleteTodo = async (id) => {
   }
 }
 
-export const updateTodo = async (id, todo) => {
+export const updateTodo = async (id: string, todo: Todo) => {
   try {
     const response = await fetch(`${API_URL}todos/${id}`, {
       method: 'PUT',
