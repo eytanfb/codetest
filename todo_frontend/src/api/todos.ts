@@ -6,18 +6,17 @@ interface Todo {
   done: boolean;
 }
 
-export const getTodos = async (): Promise<Todo[]> => {
+export const getTodos = async (): Promise<Todo[] | undefined>=> {
   try {
     const response = await fetch(`${API_URL}todos`);
     const todos = await response.json();
-    console.log(todos);
     return todos;
   } catch (error) {
     console.log(error);
   }
 }
 
-export const addTodo = async (todo: Todo): Promise<Todo> => {
+export const addTodo = async (todo: Todo): Promise<Todo | undefined> => {
   try {
     const response = await fetch(`${API_URL}todos`, {
       method: 'POST',
