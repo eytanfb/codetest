@@ -12,7 +12,7 @@ When you’re finished with the test, please email us to schedule a code review!
 Create an application to create, view, update, and destroy ‘todo’ items. The application should be a single page application based in a popular framework (React, Vue, Svelte, or similar) with a backend based which interacts with a SQL or NoSQL style database.
 
 ### To begin the code test
-* [ ] Fork this repository into a public repository on your account
+* [x] Fork this repository into a public repository on your account
 
 ### While working on this, please:
 * [ ] Commit early and often. We'll likely be following along with your progress.
@@ -23,8 +23,8 @@ Create an application to create, view, update, and destroy ‘todo’ items. The
 ## Front End Requirements
 
 ### The default UI should show a list of TODO items, each item needs
-* [ ] A text description of the todo
-* [ ] A checkbox to mark the todo as done or undone
+* [x] A text description of the todo
+* [x] A checkbox to mark the todo as done or undone
 
 ### Interactions
 * [ ] The user should be able to create a new TODO item
