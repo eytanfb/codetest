@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
+
 export default {
-  content: ["./src/**/*.{html,jsx}"],
+  content: ["./src/**/*.{html,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -16,5 +18,8 @@ export default {
     },
   },
   plugins: [],
+  safeList: [
+    'text-success',
+  ],
 }
 
