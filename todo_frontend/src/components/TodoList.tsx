@@ -93,6 +93,18 @@ const TodoList = (): JSX.Element => {
     }
   }
 
+  const deleteTodo = async (id: number) => {
+    try {
+      await TodoAPI.deleteTodo(id);
+
+      const updatedTodos = todos.filter((todo) => todo.id !== id);
+
+      setTodos(updatedTodos);
+    } catch (error: any) {
+      setError(error.message);
+    }
+  }
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -101,7 +113,7 @@ const TodoList = (): JSX.Element => {
     <div>
       {error && <div>{error}</div>}
       {todos.map((todo) => (
-        <Todo key={todo.id} todo={todo} onToggleComplete={toggleComplete} onDescriptionChange={updateDescription} />
+        <Todo key={todo.id} todo={todo} onToggleComplete={toggleComplete} onDescriptionChange={updateDescription} onDelete={deleteTodo} />
       ))}
       <PlaceholderTodo todo={{ id: 0, description: '', done: false }} onToggleComplete={toggleComplete} onDescriptionChange={addTodo} />
     </div>
