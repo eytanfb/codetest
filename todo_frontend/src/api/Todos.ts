@@ -1,10 +1,11 @@
 import { Todo } from './types/Todo';
 
-const API_URL = 'http://localhost:3000/';
+//const API_URL = process.env.API_ENV === 'production' ? 'https://eytan-todo-api-roaming-hunger-b74311822e2c.herokuapp.com/' : 'http://localhost:3000';
+const API_URL = 'https://eytan-todo-api-roaming-hunger-b74311822e2c.herokuapp.com/';
 
 export const getTodos = async () => {
   try {
-    const response = await fetch(`${API_URL}todos`);
+    const response = await fetch(`${API_URL}/todos`);
     const todos = await response.json();
     return todos;
   } catch (error) {
@@ -14,7 +15,7 @@ export const getTodos = async () => {
 
 export const addTodo = async (description: string) => {
   try {
-    const response = await fetch(`${API_URL}todos`, {
+    const response = await fetch(`${API_URL}/todos`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -30,7 +31,7 @@ export const addTodo = async (description: string) => {
 
 export const deleteTodo = async (id: number) => {
   try {
-    const response = await fetch(`${API_URL}todos/${id}`, {
+    const response = await fetch(`${API_URL}/todos/${id}`, {
       method: 'DELETE'
     });
     const deletedTodo = await response.json();
@@ -42,7 +43,7 @@ export const deleteTodo = async (id: number) => {
 
 export const updateTodo = async (id: number, todo: Todo) => {
   try {
-    const response = await fetch(`${API_URL}todos/${id}`, {
+    const response = await fetch(`${API_URL}/todos/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
