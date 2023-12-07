@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import { getTodos, addTodo, deleteTodo, updateTodo } from '../Todos';
 
 const API_URL = 'http://localhost:3000';
@@ -71,7 +75,7 @@ describe('updateTodo', () => {
     expect(global.fetch).toHaveBeenCalledWith(`${API_URL}/todos/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedTodo),
+      body: JSON.stringify({ description: updatedTodo.description, done: updatedTodo.done }),
     });
   });
 });
