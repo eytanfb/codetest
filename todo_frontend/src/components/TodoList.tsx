@@ -4,6 +4,24 @@ import * as TodoAPI from '../api/Todos';
 import Todo from './Todo';
 import PlaceholderTodo from './PlaceholderTodo';
 
+const sortTodosByDone = (todos: TodoType[]): TodoType[] => {
+  const unsortedTodos = [...todos];
+
+  unsortedTodos.sort((a: TodoType, b: TodoType) => {
+    if (a.done && !b.done) {
+      return 1;
+    }
+
+    if (!a.done && b.done) {
+      return -1;
+    }
+
+    return 0;
+  });
+
+  return unsortedTodos;
+}
+
 const TodoList = (): JSX.Element => {
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -14,7 +32,9 @@ const TodoList = (): JSX.Element => {
       setIsLoading(true);
       try {
         const todos = await TodoAPI.getTodos();
-        setTodos(todos);
+
+        const sortedTodos = sortTodosByDone(todos);
+        setTodos(sortedTodos);
       } catch (error: any) {
         setError(error.message);
       } finally {
