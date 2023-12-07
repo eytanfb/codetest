@@ -1,37 +1,14 @@
 # Todo Application By Eytan
 
-You can run this application with or without Docker. Steps to run are below
+## Production deployment
 
-## Running the application with Docker
+I was able to use Heroku for the backend deploy and Vercel for the frontend deploy. Here are the links
 
-I have Dockerized the application from the root folder so all you need to do is run:
+App: [https://codetest-zeta.vercel.app/](https://codetest-zeta.vercel.app/)
 
-```bash
-docker-compose build
-docker-compose up
-```
+API: [https://eytan-todo-api-roaming-hunger-b74311822e2c.herokuapp.com/](https://eytan-todo-api-roaming-hunger-b74311822e2c.herokuapp.com/)
 
-In the first run, please run the following to run db migrations
-
-```bash
-docker-compose run todo_api rake db:migrate
-```
-
-### Accessing the Application
-
-**Rails API**: The Rails API will be accessible at **http://localhost:3000**
-
-**React Frontend**: The React application will be accessible at **http://localhost:8080**
-
-### Stopping the Application
-
-To stop the Docker containers, you can use:
-
-```bash
-docker-compose down
-```
-
-## Running the application without Docker
+## Running the application locally
 
 To run the application without docker please follow these instructions.
 
