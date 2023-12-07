@@ -45,8 +45,8 @@ describe('addTodo', () => {
 
 describe('deleteTodo', () => {
   it('should delete a todo from the API', async () => {
-    const id = '1';
-    const mockResponse = { id: 1, description: 'Todo 1', done: false };
+    const id = 1;
+    const mockResponse = { id, description: 'Todo 1', done: false };
 
     jest.spyOn(global, 'fetch').mockResolvedValueOnce({
       json: jest.fn().mockResolvedValueOnce(mockResponse),
@@ -62,8 +62,8 @@ describe('deleteTodo', () => {
 
 describe('updateTodo', () => {
   it('should update a todo in the API', async () => {
-    const id = '1';
-    const updatedTodo = { id: 1, description: 'Updated Todo', done: true };
+    const id = 1;
+    const updatedTodo = { id, description: 'Updated Todo', done: true };
 
     jest.spyOn(global, 'fetch').mockResolvedValueOnce({
       json: jest.fn().mockResolvedValueOnce(updatedTodo),

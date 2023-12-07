@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Todo as TodoType } from '../api/types/Todo';
-import { getTodos, updateTodo } from '../api/Todos';
+import * as TodoAPI from '../api/Todos';
 import Todo from './Todo';
+import PlaceholderTodo from './PlaceholderTodo';
 
 const TodoList = (): JSX.Element => {
   const [todos, setTodos] = useState<TodoType[]>([]);
@@ -12,7 +13,7 @@ const TodoList = (): JSX.Element => {
     const fetchTodos = async () => {
       setIsLoading(true);
       try {
-        const todos = await getTodos();
+        const todos = await TodoAPI.getTodos();
         setTodos(todos);
       } catch (error: any) {
         setError(error.message);
@@ -24,8 +25,8 @@ const TodoList = (): JSX.Element => {
     fetchTodos();
   }, []);
 
-  const toggleComplete = async (id: string) => {
-    const todo = todos.find((todo) => todo.id.toString() === id);
+  const toggleComplete = async (id: number) => {
+    const todo = todos.find((todo) => todo.id === id);
 
     if (!todo) {
       return;
@@ -37,7 +38,7 @@ const TodoList = (): JSX.Element => {
         done: !todo.done,
       };
 
-      await updateTodo(id, updatedTodo);
+      await TodoAPI.updateTodo(id, updatedTodo);
 
       const updatedTodos = todos.map((todo) => {
         if (todo.id === updatedTodo.id) {
@@ -53,6 +54,45 @@ const TodoList = (): JSX.Element => {
     }
   }
 
+  const updateDescription = async (id: number, description: string) => {
+    const todo = todos.find((todo) => todo.id === id);
+
+    if (!todo) {
+      return;
+    }
+
+    try {
+      const updatedTodo = {
+        ...todo,
+        description,
+      };
+
+      await TodoAPI.updateTodo(id, updatedTodo);
+
+      const updatedTodos = todos.map((todo) => {
+        if (todo.id === updatedTodo.id) {
+          return updatedTodo;
+        }
+
+        return todo;
+      });
+
+      setTodos(updatedTodos);
+    } catch (error: any) {
+      setError(error.message);
+    }
+  }
+
+  const addTodo = async (description: string) => {
+    try {
+      const todo = await TodoAPI.addTodo(description);
+
+      setTodos([...todos, todo]);
+    } catch (error: any) {
+      setError(error.message);
+    }
+  }
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -61,8 +101,9 @@ const TodoList = (): JSX.Element => {
     <div>
       {error && <div>{error}</div>}
       {todos.map((todo) => (
-        <Todo key={todo.id} todo={todo} onToggleComplete={toggleComplete} />
+        <Todo key={todo.id} todo={todo} onToggleComplete={toggleComplete} onDescriptionChange={updateDescription} />
       ))}
+      <PlaceholderTodo todo={{ id: 0, description: '', done: false }} onToggleComplete={toggleComplete} onDescriptionChange={addTodo} />
     </div>
   );
 }

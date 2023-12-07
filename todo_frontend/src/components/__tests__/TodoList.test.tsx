@@ -72,4 +72,34 @@ describe('TodoList', () => {
       expect(screen.getByText('Todo 2')).toBeInTheDocument();
     });
   });
+
+  it('updates a todo', async () => {
+    (getTodos as jest.Mock).mockResolvedValue([
+      { id: 1, description: 'Todo 1', done: false },
+      { id: 2, description: 'Todo 2', done: false },
+    ]);
+
+    render(<TodoList />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Todo 1')).toBeInTheDocument();
+      expect(screen.getByText('Todo 2')).toBeInTheDocument();
+    });
+
+    (getTodos as jest.Mock).mockResolvedValue([
+      { id: 1, description: 'Todo 1', done: false },
+      { id: 2, description: 'Todo 2', done: true },
+    ]);
+
+    const todo2Input = screen.getByTestId('todo-2-input');
+
+    await act(async () => {
+      fireEvent.change(todo2Input, { target: { value: 'Todo 2 updated' } });
+    });
+
+    await waitFor(() => {
+      expect(todo2Input).toHaveValue('Todo 2 updated');
+      expect(screen.getByText('Todo 1')).toBeInTheDocument();
+    });
+  });
 });

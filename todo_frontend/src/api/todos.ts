@@ -12,14 +12,14 @@ export const getTodos = async () => {
   }
 }
 
-export const addTodo = async (todo: Todo) => {
+export const addTodo = async (description: string) => {
   try {
     const response = await fetch(`${API_URL}todos`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(todo)
+      body: JSON.stringify({ description: description })
     });
     const newTodo = await response.json();
     return newTodo;
@@ -28,7 +28,7 @@ export const addTodo = async (todo: Todo) => {
   }
 }
 
-export const deleteTodo = async (id: string) => {
+export const deleteTodo = async (id: number) => {
   try {
     const response = await fetch(`${API_URL}todos/${id}`, {
       method: 'DELETE'
@@ -40,7 +40,7 @@ export const deleteTodo = async (id: string) => {
   }
 }
 
-export const updateTodo = async (id: string, todo: Todo) => {
+export const updateTodo = async (id: number, todo: Todo) => {
   try {
     const response = await fetch(`${API_URL}todos/${id}`, {
       method: 'PUT',
