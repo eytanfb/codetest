@@ -69,7 +69,7 @@ Create an application to create, view, update, and destroy ‘todo’ items. The
 * [x] Commit early and often. We'll likely be following along with your progress.
 
 ### Upon completion, please email to us:
-* [ ] A link to your repository with code in it.
+* [x] A link to your repository with code in it.
 
 ## Front End Requirements
 
@@ -93,7 +93,7 @@ Create an application to create, view, update, and destroy ‘todo’ items. The
 If you find that you have completed the earlier items with time to spare, please consider adding the following
 
 ### Suggestions for improvements
-* [ ] Deploy your TODO app to the internet so we can see it in action
+* [x] Deploy your TODO app to the internet so we can see it in action
 * [ ] Test it on Mobile device sizes.
 * [x] Write unit tests for your code.
 * [ ] Edit this ReadMe with new suggestions for how to improve this code test

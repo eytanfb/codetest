@@ -26,13 +26,13 @@ describe('getTodos', () => {
 
 describe('addTodo', () => {
   it('should add a new todo to the API', async () => {
-    const newTodo = { id: 3, description: 'New Todo', done: false };
+    const newTodo = { description: 'New Todo' };
 
     jest.spyOn(global, 'fetch').mockResolvedValueOnce({
       json: jest.fn().mockResolvedValueOnce(newTodo),
     } as any);
 
-    const addedTodo = await addTodo(newTodo);
+    const addedTodo = await addTodo('New Todo');
 
     expect(addedTodo).toEqual(newTodo);
     expect(global.fetch).toHaveBeenCalledWith(`${API_URL}/todos`, {

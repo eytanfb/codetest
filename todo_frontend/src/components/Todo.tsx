@@ -14,7 +14,6 @@ const Todo = ({ todo, onToggleComplete, onDescriptionChange, onDelete }: Props):
   const [isChecked, setIsChecked] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [description, setDescription] = useState('');
-  const [error, setError] = useState('');
 
   useEffect(() => {
     setIsChecked(todo.done);
