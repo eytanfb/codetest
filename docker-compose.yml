@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   todo_api:
-    build: ./todo_api
+    build:
+      context: ./todo_api
+      dockerfile: Dockerfile.dev
     ports:
       - "3000:3000"
     environment:
@@ -12,7 +14,9 @@ services:
       - db
 
   todo_frontend:
-    build: ./todo_frontend
+    build:
+      context: ./todo_frontend
+      dockerfile: Dockerfile.dev
     ports:
       - "8080:80"
     volumes:

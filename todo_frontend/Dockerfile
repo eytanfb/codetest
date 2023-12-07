@@ -12,7 +12,7 @@ RUN npm install
 # Copy the rest of the app's source code
 COPY . /app
 
-# Build the application
+ #Build the application
 RUN npm run build
 
 # Stage 2: Serve the application with Nginx
